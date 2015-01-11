@@ -116,6 +116,43 @@ public class Reader
   
   //----------------------------------------------------------------------
 
+  /** assumes that comments have been removed already in 'line' */
+  private boolean isBlockHeaderLine(String line)
+  {
+    // it looks like some files (e.g. SModelS example files with cross
+    // sections have block body lines which do not have a white space
+    // at the beginning of the line but start with numbers..
+    //
+    // so assume everything which does not start with a letter
+    // (and is not an empty line) is a block body line and block
+    // header lines start with a letter..
+    //
+    // if (line.startsWith(" ") || line.startsWith("\t"))
+    //
+
+    // find first non-whitespace character in the line
+
+    int len = line.length();
+
+    for (int pos = 0; pos < len; ++pos)
+    {
+      char ch = line.charAt(pos);
+      
+      if (Character.isWhitespace(ch))
+        continue;
+      
+      if (Character.isJavaIdentifierStart(ch))
+        return true;
+      else
+        return false;
+    }
+    
+    // looks like it's an empty line
+    return false;
+  }
+  
+  //----------------------------------------------------------------------
+
   /** note that 'lines' is modified */
   private void processLines(List<LineEntry> lines)
   {
@@ -136,7 +173,8 @@ public class Reader
         continue;
       }
       
-      if (line.startsWith(" ") || line.startsWith("\t"))
+         
+      if (! this.isBlockHeaderLine(line))
       {
         // ordinary line
         if (thisBlock == null)
@@ -145,6 +183,7 @@ public class Reader
         continue;
       }        
       
+      // we have a block header
       if (line.startsWith(("BLOCK ")))
       {
         // process the previous block if defined
