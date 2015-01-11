@@ -18,6 +18,7 @@ package edu.ucsd.hep.slhaviewer.dataformat;
 import edu.ucsd.hep.slhaviewer.Particle;
 import edu.ucsd.hep.slhaviewer.Particles;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -116,6 +117,35 @@ public class XsectBlock
         
     } // loop over lines
   }
-  //----------------------------------------------------------------------
   
+  //----------------------------------------------------------------------
+
+  public List<Entry> getEntries()
+  {
+    return Collections.unmodifiableList(entries);
+  }
+  
+  //----------------------------------------------------------------------
+
+  public Particle getBeamParticle(int index)
+  {
+    return this.beamParticles[index];
+  }
+  
+  //----------------------------------------------------------------------
+
+  public List<Particle> getFinalStateParticles()
+  {
+    return Collections.unmodifiableList(finalStateParticles);
+  }
+
+  //----------------------------------------------------------------------
+
+  public double getSqrts()
+  {
+    return sqrts;
+  }
+
+  //----------------------------------------------------------------------
+
 }
