@@ -19,6 +19,7 @@ import edu.ucsd.hep.slhaviewer.Particle;
 import edu.ucsd.hep.slhaviewer.Particles;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -90,5 +91,29 @@ public class DecayBlock
   {
     return decayWidth;
   }
+
+  //----------------------------------------------------------------------
+  
+  /** compares DecayBlock objects by the absolute PdgId of the mother particle */
+  public static class AbsPdgIDComparator implements Comparator<DecayBlock>
+  {
+    public int compare(DecayBlock d1, DecayBlock d2)
+    {
+      int id1 = d1.getMother().pdgId;
+      int id2 = d2.getMother().pdgId;
+
+      int diff = Math.abs(id1) - Math.abs(id2);
+      if (diff != 0)
+        return diff;
+
+      // positive ids first
+      diff = id2 - id1;
+      return diff;
+
+    }
+   
+  }
+
+  //----------------------------------------------------------------------
 
 }
