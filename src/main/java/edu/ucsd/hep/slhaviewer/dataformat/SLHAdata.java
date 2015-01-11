@@ -16,6 +16,7 @@
 package edu.ucsd.hep.slhaviewer.dataformat;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,9 +52,11 @@ public class SLHAdata
   
   //----------------------------------------------------------------------
 
+  /** @return null if the particle is not found (i.e. the information
+      was not contained in the SLHA file) */
   public Double getParticleMass(int pdgId)
   {
-    throw new UnsupportedOperationException("not yet implemented");
+    return this.massBlock.getMass(pdgId);
   }
   
   //----------------------------------------------------------------------
@@ -61,6 +64,13 @@ public class SLHAdata
   public DecayBlock getDecayBlock(int pdgId)
   {
     return this.decays.get(pdgId);
+  }
+  
+  //----------------------------------------------------------------------
+
+  public Map<Integer, DecayBlock> getDecays()
+  {
+    return Collections.unmodifiableMap(decays);
   }
   
   //----------------------------------------------------------------------
