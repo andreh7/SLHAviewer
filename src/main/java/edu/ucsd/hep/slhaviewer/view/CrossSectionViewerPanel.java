@@ -20,6 +20,8 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  * A panel for viewing cross sections.
@@ -44,6 +46,10 @@ public class CrossSectionViewerPanel extends JPanel
     
     JTable table = new JTable();
     table.setModel(tableModel);
+    
+    // enable table sorting
+    TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(table.getModel());
+    table.setRowSorter(sorter);
     
     this.add(new JScrollPane(table), BorderLayout.CENTER);
   }

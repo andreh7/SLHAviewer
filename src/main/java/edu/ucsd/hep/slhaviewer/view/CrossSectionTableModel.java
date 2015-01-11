@@ -147,7 +147,27 @@ public class CrossSectionTableModel extends AbstractTableModel
   @Override
   public Class<?> getColumnClass(int columnIndex)
   {
-    return super.getColumnClass(columnIndex); //To change body of generated methods, choose Tools | Templates.
+    switch (selectedColumns[columnIndex])
+    {
+      case COL_PROCESS: 
+      case COL_PROG_NAME: 
+      case COL_PROG_VERSION:
+        return String.class;
+      
+      case COL_SQRTS: 
+      case COL_KAPPA_FACT: 
+      case COL_KAPPA_RENORM: 
+      case COL_XSECT: 
+        return Double.class;
+      
+      case COL_QCD_ORDER: 
+      case COL_EW_ORDER: 
+      case COL_SCALE_SCHEME: 
+      case COL_PDF_ID: 
+        return Integer.class;
+      
+      default: return super.getColumnClass(columnIndex);
+    }
   }
 
   //----------------------------------------------------------------------
@@ -183,5 +203,8 @@ public class CrossSectionTableModel extends AbstractTableModel
     } // switch
   }
 
+  //----------------------------------------------------------------------
+
+  
   
 }
