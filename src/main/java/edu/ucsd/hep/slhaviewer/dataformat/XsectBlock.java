@@ -28,7 +28,7 @@ import java.util.List;
  * 
  * @author holzner
  */
-class XsectBlock
+public class XsectBlock
 {
   private final double sqrts;
   private final Particle[] beamParticles = new Particle[2];
