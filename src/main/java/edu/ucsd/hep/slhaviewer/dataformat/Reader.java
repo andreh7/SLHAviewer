@@ -44,6 +44,17 @@ public class Reader
     int lineNumber;
     ArrayList<String> parts;
     boolean isEmpty;
+
+    /** @return the given part parsed as an integer */
+    public int intPart(int index)
+    {
+      return Integer.parseInt(parts.get(index));
+    }
+    
+    public double doublePart(int index)
+    {
+      return Double.parseDouble(parts.get(index));
+    }
   }
   
   //----------------------------------------------------------------------
