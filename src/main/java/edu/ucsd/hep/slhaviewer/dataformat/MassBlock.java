@@ -48,6 +48,9 @@ public class MassBlock
   }
   //----------------------------------------------------------------------
   
+  /** @return null if the particle is not found (i.e. the information
+      was not contained in the SLHA file). Also checks the anti-particle.
+    */
   public Double getMass(int pdgId)
   {
     if (masses.containsKey(pdgId))
