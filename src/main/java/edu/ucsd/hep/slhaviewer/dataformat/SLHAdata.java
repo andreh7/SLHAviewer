@@ -15,6 +15,7 @@
  */
 package edu.ucsd.hep.slhaviewer.dataformat;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,8 +30,11 @@ public class SLHAdata
   
   // maps from mother pdgId to decay block
   Map<Integer, DecayBlock> decays = new HashMap<Integer, DecayBlock>();
+
   private MassBlock massBlock;
 
+  private List<XsectBlock> crossSections = new ArrayList<XsectBlock>();
+  
   //----------------------------------------------------------------------
 
   SLHAdata(List<Reader.LineEntry> origLines)
@@ -83,6 +87,13 @@ public class SLHAdata
   public MassBlock getMassBlock()
   {
     return this.massBlock;
+  }
+
+  //----------------------------------------------------------------------
+
+  void addCrossSection(XsectBlock xsectBlock)
+  {
+    this.crossSections.add(xsectBlock);
   }
 
   //----------------------------------------------------------------------
