@@ -38,6 +38,9 @@ public class Particles
     putParticle(36, "A", "CP odd Higgs boson");
     putParticle(37, "H+", "charged Higgs boson");
     putParticle(5, "b", "b quark");
+
+    putParticle(2212, "p", "proton");
+    
     putParticle(1000001, "~d_L", "lefthanded down squark");
     putParticle(2000001, "~d_R", "righthanded down squark");
     putParticle(1000002, "~u_L", "lefthanded up squark");
@@ -48,8 +51,12 @@ public class Particles
     putParticle(2000004, "~c_R", "righthanded charm squark");
     putParticle(1000005, "~b_1", "lighter sbottom");
     putParticle(2000005, "~b_2", "heavier sbottom");
+    
     putParticle(1000006, "~t_1", "lighter stop");
     putParticle(2000006, "~t_2", "heavier stop");
+    putParticle(- 1000006, "~t_1*", "lighter anti-stop");
+    putParticle(- 2000006, "~t_2*", "heavier anti-stop");
+    
     putParticle(1000011, "~e_L", "lefthanded selectron");
     putParticle(2000011, "~e_R", "righthanded selectron");
     putParticle(1000012, "~nu_eL", "electron sneutrino");
@@ -66,8 +73,12 @@ public class Particles
     putParticle(1000023, "~chi_20", "neutralino 2");
     putParticle(1000025, "~chi_30", "neutralino 3");
     putParticle(1000035, "~chi_40", "neutralino 4");
-    putParticle(1000024, "~chi_1+", "chargino 1");
-    putParticle(1000037, "~chi_2+", "chargino 2");
+    putParticle(1000024, "~chi_1+", "chargino 1+");
+    putParticle(1000037, "~chi_2+", "chargino 2+");
+
+    putParticle(- 1000024, "~chi_1-", "chargino 1-");
+    putParticle(- 1000037, "~chi_2-", "chargino 2-");
+
   }
   
   private static void putParticle(int pdgId, String shortName, String verboseName)
