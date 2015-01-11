@@ -214,6 +214,20 @@ public class Reader
         continue;
       } 
       
+      if (line.startsWith("XSECTION "))
+      {
+        // process the previous block if defined
+        if (thisBlock != null)
+          processBlock(blockName, thisBlock);
+                
+        blockName = "XSECTION";
+        
+        thisBlock = new ArrayList<LineEntry>();
+        thisBlock.add(entry); // keep the first line (it contains particle id and the width)
+        
+        continue;
+      } 
+      
       throw new Error("don't know what to do with line " + entry.lineNumber);
     
     } // end of loop over lines
@@ -232,9 +246,7 @@ public class Reader
   {
     
     // this assumes that there is no 'BLOCK DECAY'
-    boolean isDecayBlock = blockName.equals("DECAY");
-
-    if (isDecayBlock)
+    if (blockName.equals("DECAY"))
     {
       data.addDecay(new DecayBlock(lines));
       return;
@@ -245,10 +257,12 @@ public class Reader
       data.setMasses(new MassBlock(lines));
       return;
     }
-    
-//    LineEntry firstLine = lines.get(0);
-//    if (firstLine.parts.size() < 2)
-//      throw new Error("unexpected number of parts");
+
+    if (blockName.equals("XSECTION"))
+    {
+      data.addCrossSection(new XsectBlock(lines));
+      return;
+    }
     
     System.out.println("WARNING: don't know what to do with block " + blockName);
   }
