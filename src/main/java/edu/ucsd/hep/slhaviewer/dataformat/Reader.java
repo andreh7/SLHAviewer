@@ -44,6 +44,17 @@ public class Reader
     int lineNumber;
     ArrayList<String> parts;
     boolean isEmpty;
+
+    /** @return the given part parsed as an integer */
+    public int intPart(int index)
+    {
+      return Integer.parseInt(parts.get(index));
+    }
+    
+    public double doublePart(int index)
+    {
+      return Double.parseDouble(parts.get(index));
+    }
   }
   
   //----------------------------------------------------------------------
@@ -105,6 +116,43 @@ public class Reader
   
   //----------------------------------------------------------------------
 
+  /** assumes that comments have been removed already in 'line' */
+  private boolean isBlockHeaderLine(String line)
+  {
+    // it looks like some files (e.g. SModelS example files with cross
+    // sections have block body lines which do not have a white space
+    // at the beginning of the line but start with numbers..
+    //
+    // so assume everything which does not start with a letter
+    // (and is not an empty line) is a block body line and block
+    // header lines start with a letter..
+    //
+    // if (line.startsWith(" ") || line.startsWith("\t"))
+    //
+
+    // find first non-whitespace character in the line
+
+    int len = line.length();
+
+    for (int pos = 0; pos < len; ++pos)
+    {
+      char ch = line.charAt(pos);
+      
+      if (Character.isWhitespace(ch))
+        continue;
+      
+      if (Character.isJavaIdentifierStart(ch))
+        return true;
+      else
+        return false;
+    }
+    
+    // looks like it's an empty line
+    return false;
+  }
+  
+  //----------------------------------------------------------------------
+
   /** note that 'lines' is modified */
   private void processLines(List<LineEntry> lines)
   {
@@ -125,7 +173,8 @@ public class Reader
         continue;
       }
       
-      if (line.startsWith(" ") || line.startsWith("\t"))
+         
+      if (! this.isBlockHeaderLine(line))
       {
         // ordinary line
         if (thisBlock == null)
@@ -134,6 +183,7 @@ public class Reader
         continue;
       }        
       
+      // we have a block header
       if (line.startsWith(("BLOCK ")))
       {
         // process the previous block if defined
@@ -164,6 +214,20 @@ public class Reader
         continue;
       } 
       
+      if (line.startsWith("XSECTION "))
+      {
+        // process the previous block if defined
+        if (thisBlock != null)
+          processBlock(blockName, thisBlock);
+                
+        blockName = "XSECTION";
+        
+        thisBlock = new ArrayList<LineEntry>();
+        thisBlock.add(entry); // keep the first line (it contains particle id and the width)
+        
+        continue;
+      } 
+      
       throw new Error("don't know what to do with line " + entry.lineNumber);
     
     } // end of loop over lines
@@ -182,9 +246,7 @@ public class Reader
   {
     
     // this assumes that there is no 'BLOCK DECAY'
-    boolean isDecayBlock = blockName.equals("DECAY");
-
-    if (isDecayBlock)
+    if (blockName.equals("DECAY"))
     {
       data.addDecay(new DecayBlock(lines));
       return;
@@ -195,10 +257,12 @@ public class Reader
       data.setMasses(new MassBlock(lines));
       return;
     }
-    
-//    LineEntry firstLine = lines.get(0);
-//    if (firstLine.parts.size() < 2)
-//      throw new Error("unexpected number of parts");
+
+    if (blockName.equals("XSECTION"))
+    {
+      data.addCrossSection(new XsectBlock(lines));
+      return;
+    }
     
     System.out.println("WARNING: don't know what to do with block " + blockName);
   }
