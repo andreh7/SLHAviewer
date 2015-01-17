@@ -37,7 +37,19 @@ public class Particles
     putParticle(35, "H", "heavy CP even Higgs boson");
     putParticle(36, "A", "CP odd Higgs boson");
     putParticle(37, "H+", "charged Higgs boson");
+   
+    putParticle(1, "d", "down quark");
+    putParticle(- 1, "d*", "anti down quark");
+    putParticle(2, "u", "up quark");
+    putParticle(- 2, "u*", "anti up quark");
+    putParticle(3, "s", "strange quark");
+    putParticle(- 3, "s*", "anti strange quark");
+    putParticle(4, "c", "charm quark");
+    putParticle(- 4, "c*", "anti charm quark");
     putParticle(5, "b", "b quark");
+    putParticle(- 5, "b*", "anti b quark");
+    putParticle(6, "t", "top quark");
+    putParticle(- 6, "t*", "anti top quark");
 
     putParticle(2212, "p", "proton");
     
