@@ -75,6 +75,13 @@ public class SLHAdata
   
   //----------------------------------------------------------------------
 
+  public boolean hasDecays()
+  {
+    return ! decays.isEmpty();
+  }
+  
+  //----------------------------------------------------------------------
+
   public Double getParticleDecayWidth(int pdgId)
   {
     DecayBlock db = getDecayBlock(pdgId);
@@ -115,5 +122,18 @@ public class SLHAdata
 
   //----------------------------------------------------------------------
 
+  public boolean hasMasses()
+  {
+    return ! this.massBlock.isEmpty();
+  }
+
+  //----------------------------------------------------------------------
+
+  public boolean hasCrossSections()
+  {
+    return ! this.crossSections.isEmpty();
+  }
+
+  //----------------------------------------------------------------------
 
 }
