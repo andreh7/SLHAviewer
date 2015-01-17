@@ -73,7 +73,7 @@
           <!-- ====================================================================== -->
 
           <execution>
-            <id>build-ibmonitor</id>
+            <id>build-slhaviewer</id>
 
             <configuration>
             
