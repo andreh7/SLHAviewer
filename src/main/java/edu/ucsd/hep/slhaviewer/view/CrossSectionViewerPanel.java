@@ -34,6 +34,7 @@ import javax.swing.table.TableRowSorter;
  */
 public class CrossSectionViewerPanel extends JPanel
 {
+
   private final CrossSectionTableModel tableModel;
 
   //----------------------------------------------------------------------
@@ -61,6 +62,15 @@ public class CrossSectionViewerPanel extends JPanel
     this.tableModel.setCrossSections(slhaData);
   }
 
+  //----------------------------------------------------------------------
+
+  static CrossSectionViewerPanel make(SLHAdata data)
+  {
+    CrossSectionViewerPanel retval = new CrossSectionViewerPanel();
+    retval.setCrossSections(data);
+    return retval;
+  }
+  
   //----------------------------------------------------------------------
 
 }
