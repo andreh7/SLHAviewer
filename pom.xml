@@ -41,4 +41,68 @@
       <type>jar</type>
     </dependency>
   </dependencies>
+
+  <!-- for assembly:assembly -->
+  <build>
+    <resources>
+      <resource>
+        <!-- for embedding jsp etc. files --> 
+        <directory>html/</directory>
+      </resource>
+    </resources>
+
+    <plugins>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+
+        <executions>
+
+          <!-- ====================================================================== -->
+
+          <execution>
+            <id>build-ibmonitor</id>
+
+            <configuration>
+            
+              <!-- the name of the output file to produce -->
+              <finalName>slhaviewer</finalName>
+          
+              <!-- leave the final output name as it is -->
+              <appendAssemblyId>false</appendAssemblyId>
+          
+              <archive>
+                <manifest>
+                  <mainClass>edu.ucsd.hep.slhaviewer.Main</mainClass>
+                </manifest>
+              </archive>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+  
+              <skipTests>true</skipTests>
+              <!-- tests to exclude -->
+              <excludes>
+                <exclude>**/test/**</exclude>
+              </excludes>
+  
+            </configuration>
+
+            <phase>package</phase>            
+            <goals>
+              <goal>single</goal>
+            </goals>
+
+          </execution>
+
+          <!-- ====================================================================== -->
+
+        </executions>
+
+      </plugin>
+
+      <!-- ====================================================================== -->
+
+    </plugins>
+  </build>
+
 </project>
