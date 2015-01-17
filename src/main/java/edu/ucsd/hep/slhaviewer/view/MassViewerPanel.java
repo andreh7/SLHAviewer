@@ -49,7 +49,16 @@ public class MassViewerPanel extends JPanel
     JTable table = new JTable();
     
     // generate a simple table for the moment
-    tableModel = new DefaultTableModel();
+    tableModel = new DefaultTableModel() 
+    {
+      @Override
+      public boolean isCellEditable(int row, int column)
+      {
+        // make cells readonly
+        return false;
+      }
+    };
+
     tableModel.addColumn("id");
     tableModel.addColumn("particle");
     tableModel.addColumn("short name");
