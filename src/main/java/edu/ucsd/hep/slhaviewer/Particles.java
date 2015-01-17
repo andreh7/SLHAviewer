@@ -32,7 +32,12 @@ public class Particles
  
   static 
   {
-    putParticle(24, "W+", "W boson");
+    putParticle(21, "g", "gluon");
+    putParticle(22, "gamma", "photon");
+    putParticle(23, "Z", "Z boson");
+
+    putParticle(24, "W+", "positive W boson");
+    putParticle(- 24, "W-", "negative W boson");
     putParticle(25, "h", "light CP even Higgs boson");
     putParticle(35, "H", "heavy CP even Higgs boson");
     putParticle(36, "A", "CP odd Higgs boson");
