@@ -34,6 +34,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MassViewerPanel extends JPanel
 {
+
   private final DefaultTableModel tableModel;
     
   //----------------------------------------------------------------------
@@ -60,7 +61,16 @@ public class MassViewerPanel extends JPanel
   } 
   
   //----------------------------------------------------------------------
+  
+  public static MassViewerPanel make(SLHAdata data)
+  {
+    MassViewerPanel retval = new MassViewerPanel();
+    retval.setParticles(data);
+    return retval;
+  }
 
+  //----------------------------------------------------------------------
+  
   public void setParticles(SLHAdata slhaData)
   {
     MassBlock massBlock = slhaData.getMassBlock();
