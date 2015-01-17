@@ -20,6 +20,9 @@ import edu.ucsd.hep.slhaviewer.dataformat.MassBlock;
 import edu.ucsd.hep.slhaviewer.dataformat.SLHAdata;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -28,6 +31,7 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
@@ -78,6 +82,15 @@ public class MassGraphPanel extends JPanel
     
     this.add(new ChartPanel(chart), BorderLayout.CENTER);
 
+  }
+  
+  //----------------------------------------------------------------------
+  
+  public static MassGraphPanel make(SLHAdata data)
+  {
+    MassGraphPanel retval = new MassGraphPanel();
+    retval.setParticles(data);
+    return retval;
   }
   
   //----------------------------------------------------------------------
