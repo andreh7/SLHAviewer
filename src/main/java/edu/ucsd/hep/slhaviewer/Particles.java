@@ -51,6 +51,20 @@ public class Particles
     putParticle(6, "t", "top quark");
     putParticle(- 6, "t*", "anti top quark");
 
+    putParticle(11, "e-", "electron");
+    putParticle(- 11, "e+", "positron");
+    putParticle(13, "mu-", "muon");
+    putParticle(- 13, "mu+", "anti-muon");
+    putParticle(15, "tau-", "tau");
+    putParticle(- 15, "tau+", "anti-tau");
+  
+    putParticle(12, "nu_e", "electron neutrino");
+    putParticle(- 12, "nu_e*", "electron anti-neutrino");
+    putParticle(14, "nu_mu", "muon neutrino");
+    putParticle(- 14, "nu_mu*", "muon anti-neutrino");
+    putParticle(16, "nu_tau", "tau neutrino");
+    putParticle(- 16, "nu_tau*", "tau anti-neutrino");
+    
     putParticle(2212, "p", "proton");
     
     putParticle(1000001, "~d_L", "lefthanded down squark");
