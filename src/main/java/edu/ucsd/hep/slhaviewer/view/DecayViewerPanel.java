@@ -112,7 +112,7 @@ public class DecayViewerPanel extends JPanel
     // table on the right
     //----------
 
-     detailTable = new JTable();
+    detailTable = new JTable();
     detailTableModel = new DecaysTableModel();
     detailTable.setModel(detailTableModel);
     
@@ -123,7 +123,16 @@ public class DecayViewerPanel extends JPanel
     this.add(centerPanel, BorderLayout.CENTER);
     
   }
-
+  
+  //----------------------------------------------------------------------
+  
+  public static DecayViewerPanel make(SLHAdata slhaData)
+  {
+    DecayViewerPanel retval = new DecayViewerPanel();
+    retval.setDecayData(slhaData);
+    return retval;
+  }
+  
   //----------------------------------------------------------------------
   /** this is called when a new element is selected in the left list */
   private void selectParticle(int index)
