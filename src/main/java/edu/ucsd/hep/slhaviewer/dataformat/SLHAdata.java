@@ -124,7 +124,7 @@ public class SLHAdata
 
   public boolean hasMasses()
   {
-    return ! this.massBlock.isEmpty();
+    return this.massBlock != null && ! this.massBlock.isEmpty();
   }
 
   //----------------------------------------------------------------------
