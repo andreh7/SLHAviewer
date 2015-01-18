@@ -17,8 +17,10 @@ package edu.ucsd.hep.slhaviewer.view;
 
 import edu.ucsd.hep.slhaviewer.dataformat.SLHAdata;
 import java.awt.BorderLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 
 /**
  * the main Panel for the application
@@ -27,16 +29,43 @@ import javax.swing.JTabbedPane;
 public class MainPanel extends JPanel
 {
   private final JTabbedPane tabs;
-    
+  
+  private final JLabel labelNoBlocksFound;
+  
+  private boolean tabsAdded;  
+  
   //----------------------------------------------------------------------
 
   public MainPanel()
   {
     this.setLayout(new BorderLayout());
     
-    tabs = new JTabbedPane();
+    tabs = new JTabbedPane();    
+    labelNoBlocksFound = new JLabel("no supported blocks found", SwingConstants.CENTER);
     
-    this.add(tabs, BorderLayout.CENTER);
+    this.addRemoveTabGroup(true);
+  }
+  
+  //----------------------------------------------------------------------
+
+  private void addRemoveTabGroup(boolean add)
+  {
+    if (add == tabsAdded)
+      // nothing to do
+      return;
+    
+    if (add)
+    {
+      this.remove(this.labelNoBlocksFound);
+      this.add(tabs, BorderLayout.CENTER);
+    }
+    else
+    {
+      this.remove(this.tabs);
+      this.add(this.labelNoBlocksFound, BorderLayout.CENTER);
+    }
+    
+    this.tabsAdded = add;
   }
   
   //----------------------------------------------------------------------
@@ -57,6 +86,13 @@ public class MainPanel extends JPanel
 
     if (data.hasCrossSections())
       this.tabs.add("cross sections", CrossSectionViewerPanel.make(data));
+    
+    if (this.tabs.getComponentCount() == 0)
+      // no supported blocks found
+      this.addRemoveTabGroup(false);
+    else
+      this.addRemoveTabGroup(true);
+    
   }
 
   //----------------------------------------------------------------------
